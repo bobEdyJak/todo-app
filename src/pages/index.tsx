@@ -7,8 +7,47 @@ import { useState } from "react";
 import { AnimatePresence, MotionConfig } from "framer-motion";
 import TaskInput from "@/components/TaskInput";
 
-
+// "Hello", "Good Morning", "Hola", "Guten Tag"
 export default function Home() {
+
+  var [greeting, setGreeting] = useState([
+    {
+      greeting : "Hello",
+      color : "blue",
+      font: "Times New Roman",
+      fontSize: 12
+    },
+    {
+      greeting : "Good morning",
+      color : "red",
+      font: "Courier New",
+      fontSize: 24
+    },
+
+  ]);
+
+  var clearGreeting = () => {
+    setGreeting([]);
+  }
+
+  var addGreeting = () => {
+    setGreeting(
+      [
+        {
+          greeting : "Hello",
+          color : "blue",
+          font: "Times New Roman",
+          fontSize: 12
+        },
+        {
+          greeting : "Good morning",
+          color : "red",
+          font: "Courier New",
+          fontSize: 24
+        }
+      ]
+    )
+  }
 
   return (
     <>
@@ -23,7 +62,14 @@ export default function Home() {
           <h1>Todo - Arnav</h1>
         </div>
         <div className={styles.Input}>
-          <TaskInput/>
+          <TaskInput
+            numberOfGreeting={4}
+            greeting="Hola"
+            myName="Arnav"
+            greetingArray={greeting} colorChange="blue" />
+            <button onClick={clearGreeting}>Delete Greetings</button>
+            <br />
+            <button onClick={addGreeting}>Add Greetings</button>
         </div>
         <div className={styles.ItemsContainer}>
         </div>
