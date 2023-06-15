@@ -22,8 +22,8 @@ function TaskInput(componentData: TaskInputData) {
             <p>These are some greetings: </p>
             <br />
             {componentData.greetingArray.map(
-                (greetings) => (
-                    <p style={{color: greetings.color, fontFamily: greetings.font, fontSize: greetings.fontSize}}>
+                (greetings, index) => (
+                    <p key={index} style={{color: greetings.color, fontFamily: greetings.font, fontSize: greetings.fontSize}}>
                         {greetings.greeting} people
                     </p>
                 )
