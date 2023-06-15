@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import styles from "@/styles/Home.module.css";
 import { useState } from "react";
 import { AnimatePresence, MotionConfig } from "framer-motion";
-import TaskInput from "@/components/Greetings";
+import TaskInput from "@/components/TaskInput";
 
 // "Hello", "Good Morning", "Hola", "Guten Tag"
 export default function Home() {
@@ -62,14 +62,7 @@ export default function Home() {
           <h1>Todo - Arnav</h1>
         </div>
         <div className={styles.Input}>
-          <TaskInput
-            numberOfGreeting={4}
-            greeting="Hola"
-            myName="Arnav"
-            greetingArray={greeting} colorChange="blue" />
-            <button onClick={clearGreeting}>Delete Greetings</button>
-            <br />
-            <button onClick={addGreeting}>Add Greetings</button>
+          <TaskInput></TaskInput>
         </div>
         <div className={styles.ItemsContainer}>
         </div>
