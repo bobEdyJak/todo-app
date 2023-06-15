@@ -13,7 +13,7 @@ type Greeting = {
     fontSize : number
 }
 
-function TaskInput(componentData: TaskInputData) {
+function Greeting(componentData: TaskInputData) {
     return (
         <>
         <div style={{backgroundColor: "rgb(105, 27, 128)"}}>
@@ -33,4 +33,4 @@ function TaskInput(componentData: TaskInputData) {
     );
 }
 
-export default TaskInput;
+export default Greeting;
