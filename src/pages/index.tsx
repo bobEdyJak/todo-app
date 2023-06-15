@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import styles from "@/styles/Home.module.css";
 import { useState } from "react";
 import { AnimatePresence, MotionConfig } from "framer-motion";
-import TaskInput from "@/components/TaskInput";
+import TaskInput from "@/components/Greetings";
 
 // "Hello", "Good Morning", "Hola", "Guten Tag"
 export default function Home() {
