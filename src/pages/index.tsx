@@ -6,48 +6,47 @@ import styles from "@/styles/Home.module.css";
 import { useState } from "react";
 import { AnimatePresence, MotionConfig } from "framer-motion";
 import TaskInput from "@/components/TaskInput";
+import TodoItem from "@/components/TodoItem";
 
-// "Hello", "Good Morning", "Hola", "Guten Tag"
+let defaultTodoItems: TodoItem[] = [
+  {
+    Id: "First",
+    Task: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam faucibus faucibus nulla, ut molestie enim pellentesque nec. Nam pellentesque varius libero, a placerat nunc imperdiet a. Proin vestibulum purus vel purus pellentesque consectetur ac i",
+    completed: false,
+  },
+  {
+    Id: "Second",
+    Task: "Nulla at feugiat sapien. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean bibendum urna diam, eu elementum ex scelerisque ac. Mauris sodales quam vel nisi molestie, quis cursus ligula fermentum. Nulla vel tellus eget ante mollis suscipit nec vel erat. ",
+    completed: false,
+  },
+];
+
 export default function Home() {
+  const [todoItems, setTodoItems] = useState<TodoItem[]>(defaultTodoItems);
 
-  var [greeting, setGreeting] = useState([
-    {
-      greeting : "Hello",
-      color : "blue",
-      font: "Times New Roman",
-      fontSize: 12
-    },
-    {
-      greeting : "Good morning",
-      color : "red",
-      font: "Courier New",
-      fontSize: 24
-    },
+  let deleteItem = (itemId: string) => {
+    setTodoItems((items) => {
+      let filteredList = items.filter((item) => item.Id != itemId);
+      return [...filteredList];
+    });
+  };
 
-  ]);
+  let completeItem = (itemId: string) => {
+    setTodoItems((items) => {
+      let filteredList = items.map((item) => {
+        if (item.Id != itemId) return item;
 
-  var clearGreeting = () => {
-    setGreeting([]);
-  }
+        return { ...item, completed: true };
+      });
+      return [...filteredList];
+    });
+  };
 
-  var addGreeting = () => {
-    setGreeting(
-      [
-        {
-          greeting : "Hello",
-          color : "blue",
-          font: "Times New Roman",
-          fontSize: 12
-        },
-        {
-          greeting : "Good morning",
-          color : "red",
-          font: "Courier New",
-          fontSize: 24
-        }
-      ]
-    )
-  }
+  let createItem = (item: TodoItem) => {
+    setTodoItems((items) => {
+      return [item, ...items];
+    });
+  };
 
   return (
     <>
@@ -60,11 +59,30 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.AppHeader}>
           <h1>Todo - Arnav</h1>
+          <TaskInput createItem={createItem}></TaskInput>
         </div>
         <div className={styles.Input}>
-          <TaskInput></TaskInput>
+          
         </div>
         <div className={styles.ItemsContainer}>
+        <AnimatePresence mode="popLayout">
+            {todoItems.map((item) => (
+              <motion.div
+                layout
+                layoutScroll
+                key={item.Id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+              >
+                <TodoItem
+                  item={item}
+                  completeItem={completeItem}
+                  deleteItem={deleteItem}
+                ></TodoItem>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </main>
     </>
